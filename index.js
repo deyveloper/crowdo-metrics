@@ -121,6 +121,7 @@ async function listMajors(auth) {
                             values[i][5] = forumParams[1];
                             values[i][6] = forumParams[2];
                             values[i][7] = forumParams[3];
+                            values[i][8] = forumParams[4];
                         }
                     } catch (error) {
                         console.log(`Problematic row [index]: ${i}`);
