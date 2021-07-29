@@ -77,7 +77,7 @@ async function listMajors(auth) {
                     } catch (error) {
                         console.log(`Problematic row [index]: ${i}`);
                     }
-                    toSave[withoutProtocol] = [...e.slice(1, 5)];
+                    toSave[withoutProtocol] = [...e.slice(1, 6)];
                 }
                 await fs.writeFile('forums.json', JSON.stringify(toSave), (err, res) => err ? console.error(err) : null);
                 resolve()
