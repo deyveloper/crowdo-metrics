@@ -1,6 +1,7 @@
 const fs = require('fs');
 const readline = require('readline');
 const {google} = require('googleapis');
+const { deepStrictEqual } = require('assert');
 
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 const TOKEN_PATH = 'token.json';
@@ -105,6 +106,15 @@ async function listMajors(auth) {
                 spreadsheetId: sheetId,
                 range: 'A11:I',
             }, async (err, res) => {
+                if (err) {
+                    await fs.unlink('token.json', () => null);
+                    console.error(`
+                    Token expired. Please rerun program and try to recreate token
+                    by visiting url which is be generated and login to the your account.
+                    `);
+
+                    process.exit(1);
+                };
                 let values = res.data.values;
                 if (!values) return resolve(console.info('Not finded data.'));
                 const valuesLength = values.length;
